@@ -7,7 +7,7 @@ import 'package:mocktail/mocktail.dart';
 
 class SearchJokeDataSourceMock extends Mock implements ISearchJokeDatasource {}
 
-main() {
+void main() {
   final datasource = SearchJokeDataSourceMock();
   final repository = SearchJokeRepositoryImpl(searchJokeDatasource: datasource);
 

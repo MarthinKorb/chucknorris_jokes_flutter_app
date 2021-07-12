@@ -9,19 +9,19 @@ class DioMock extends Mock implements DioForNative {}
 
 main() {
   final dio = DioMock();
-
   final datasource = SearchChuckNorrisJokeDatasource(dio: dio);
 
   test('it must return an error if statuscode is different then 200', () async {
-    when(() => dio.get('')).thenAnswer(
+    when(() => dio.get('https://api.chucknorris.io/jokes/random')).thenAnswer(
       (_) async => Response(
         data: {},
         statusCode: 400,
-        requestOptions: RequestOptions(path: ''),
+        requestOptions:
+            RequestOptions(path: 'https://api.chucknorris.io/jokes/random'),
       ),
     );
 
     final result = await datasource.getJoke();
-    expect(result, throwsA(isA<DatasourceError>()));
+    expect(result, isA<DatasourceError>());
   });
 }
